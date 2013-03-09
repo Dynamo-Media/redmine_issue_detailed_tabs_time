@@ -1,0 +1,9 @@
+bg:
+  label_history_tab_all: Всичко
+  label_history_tab_activity: Активност
+  label_history_tab_comments: Бележки
+  label_history_tab_private: Лични бележки
+  label_history_time_spent: Използвано време
+  label_history_time_hours_on: часове за
+  label_history_time_logged_by: Записано от %{author} преди %{age}
+  label_history_tab_time: Използвано време
