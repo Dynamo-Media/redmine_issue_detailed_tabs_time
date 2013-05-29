@@ -1,3 +1,10 @@
 de:
   label_history_tab_all: Alles
+  label_history_tab_activity: Aktivitäten
   label_history_tab_comments: Kommentare
+  label_history_tab_private: Privates
+  label_history_time_spent: Aufgewendete Zeit
+  label_history_time_hours_on: Stunden für
+  label_history_time_logged_by: Erfasst von %{author} vor %{age}
+  label_history_tab_time: Zeiterfassung
+  label_tabtime_questions: Fragen
