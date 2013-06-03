@@ -68,7 +68,7 @@ if User.current.allowed_to?(:view_time_entries, @project)
 		c << '<li>'
 				c << "<strong>" + l(:label_history_time_spent) + ":</strong> " + html_hours("%.2f" % timelog.hours) + " " + l(:label_history_time_hours_on) + " " + h(timelog.activity)
 		c << '</li>'
-			unless timelog.comments.empty?
+			unless timelog.comments.nil? || timelog.comments.empty?			
 				c << '<blockquote>'
 					c << '<p>'
 					c << timelog.comments 
