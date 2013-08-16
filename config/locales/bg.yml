@@ -7,3 +7,4 @@ bg:
   label_history_time_hours_on: часове за
   label_history_time_logged_by: Записано от %{author} преди %{age}
   label_history_tab_time: Използвано време
+  label_tabtime_questions: Въпроси
