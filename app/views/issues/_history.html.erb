@@ -18,45 +18,52 @@ reply_links = authorize_for('issues', 'edit')
 
 c = ''
 
-entries = journals + @issue.time_entries
+# Get a list of all journals and time entires to iterate through.  This ensures
+# that the bookmarks will be consistent for all users regardless of permission
+# level.  Combine the list for journals and time entries and sort by date. This
+# intersperses the time entires and jounals together in chronological order.
+entries = @issue.journals + @issue.time_entries
 entries.sort! { |x,y| x.created_on <=> y.created_on }
 index = 1
 for entry in entries
 
 	if entry.is_a?(Journal)
 		journal = entry
-		tabs.push({:label => :label_history_tab_comments, :name => 'history_comments'}) unless journal.notes.blank?
-	
-	 	# if journal.question
-	#  		
-			# if journal.question.assigned_to == User.current || journal.user == User.current
-	 			# #tabs.push({:label => :label_tabtime_my_questions, :name => 'tabtime_myquestions'} ) 
-	 			# tabs.push({:label => :label_tabtime_questions, :name => 'tabtime_questions'} ) 
-			# end
-	 	# end
-		tabs.push({:label => :label_history_tab_private, :name => 'history_private'} ) if journal.private_notes?
-		
-		
-		c << "<div id='change-#{journal.id}' class='#{journal.css_classes}'>"
-		c << "<h4>"
-		c << link_to("##{index}", {:anchor => "note-#{index}"}, :class => "journal-link" )
-		c << avatar(journal.user, :size => "24")
-		c << content_tag('a', '', :name => "note-#{journal.indice}")
-		c << authoring(journal.created_on, journal.user, :label => :label_updated_time_by)
-		c << "</h4>"
-	
-		if (journal.details.any?)
-			tabs.push( {:label => :label_history_tab_activity, :name => 'history_activity'})
-			c << "<ul class='details'>"
-			details_to_strings(journal.details).each do |string|
-				c << "<li>" + string + "</li>"
-			end
-			c << "</ul>"
+		# this is a check to ensure that the journal entry should be visible for the user.  Must be done
+		# this way because Journal does not include a visible? method.
+		if journals.include?(journal) # only show if visible
+  		tabs.push({:label => :label_history_tab_comments, :name => 'history_comments'}) unless journal.notes.blank?
+  	
+  	 	# if journal.question
+  	#  		
+  			# if journal.question.assigned_to == User.current || journal.user == User.current
+  	 			# #tabs.push({:label => :label_tabtime_my_questions, :name => 'tabtime_myquestions'} ) 
+  	 			# tabs.push({:label => :label_tabtime_questions, :name => 'tabtime_questions'} ) 
+  			# end
+  	 	# end
+  		tabs.push({:label => :label_history_tab_private, :name => 'history_private'} ) if journal.private_notes?
+  		
+  		
+  		c << "<div id='change-#{journal.id}' class='#{journal.css_classes}'>"
+  		c << "<h4>"
+  		c << link_to("##{index}", {:anchor => "note-#{index}"}, :class => "journal-link" )
+  		c << avatar(journal.user, :size => "24")
+  		c << content_tag('a', '', :name => "note-#{journal.indice}")
+  		c << authoring(journal.created_on, journal.user, :label => :label_updated_time_by)
+  		c << "</h4>"
+  	
+  		if (journal.details.any?)
+  			tabs.push( {:label => :label_history_tab_activity, :name => 'history_activity'})
+  			c << "<ul class='details'>"
+  			details_to_strings(journal.details).each do |string|
+  				c << "<li>" + string + "</li>"
+  			end
+  			c << "</ul>"
+  		end
+  	 	c << render_notes(issue, journal, :reply_links => reply_links) unless journal.notes.blank?
+  		c << "</div>" 
+  		c <<  call_hook(:view_issues_history_journal_bottom, { :journal => journal })
 		end
-	 	c << render_notes(issue, journal, :reply_links => reply_links) unless journal.notes.blank?
-		c << "</div>" 
-		c <<  call_hook(:view_issues_history_journal_bottom, { :journal => journal })
-		index += 1
 	elsif entry.is_a?(TimeEntry)
 	  timelog = entry
 	  if User.current.allowed_to?(:view_time_entries, @project) 
@@ -81,12 +88,11 @@ for entry in entries
 				end
 			c << '</ul>'
 		c << '</div>'
-		index += 1
 		
 		tabs.push( {:label => :label_history_tab_time, :name => 'tabtime_time'}) 	
 	  end
 end 
-
+index += 1
 end 
 tabs = tabs.uniq
 %>
