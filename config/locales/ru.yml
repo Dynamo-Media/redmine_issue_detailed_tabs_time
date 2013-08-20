@@ -1,3 +1,10 @@
 ru:
   label_history_tab_all: Все
+  label_history_tab_activity: Активность
   label_history_tab_comments: Комментарии
+  label_history_tab_private: Частное
+  label_history_time_spent: Затраченное время
+  label_history_time_hours_on: hours on
+  label_history_time_logged_by: Зарегистрировано %{author} %{age} назад
+  label_history_tab_time: Лог времени
+  label_tabtime_questions: Вопросы
