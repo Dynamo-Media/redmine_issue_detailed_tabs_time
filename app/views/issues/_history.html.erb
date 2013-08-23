@@ -34,7 +34,7 @@ for entry in entries
 		if journals.include?(journal) # only show if visible
 			unless journal.notes.blank?
 				tabs.push({:label => :label_history_tab_comments, :name => 'history_comments'}) 
-				selected_tab = 'history_comments'
+				selected_tab = 'history_comments' unless params[:tab]
 			end
   	
   	 	# if journal.question	
