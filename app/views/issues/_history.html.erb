@@ -32,14 +32,16 @@ for entry in entries
 		# this is a check to ensure that the journal entry should be visible for the user.  Must be done
 		# this way because Journal does not include a visible? method.
 		if journals.include?(journal) # only show if visible
-  		tabs.push({:label => :label_history_tab_comments, :name => 'history_comments'}) unless journal.notes.blank?
+			unless journal.notes.blank?
+				tabs.push({:label => :label_history_tab_comments, :name => 'history_comments'}) 
+				selected_tab = 'history_comments' unless params[:tab]
+			end
   	
-  	 	# if journal.question
-  	#  		
-  			# if journal.question.assigned_to == User.current || journal.user == User.current
-  	 			# #tabs.push({:label => :label_tabtime_my_questions, :name => 'tabtime_myquestions'} ) 
-  	 			# tabs.push({:label => :label_tabtime_questions, :name => 'tabtime_questions'} ) 
-  			# end
+  	 	# if journal.question	
+  		# 	if journal.question.assigned_to == User.current || journal.user == User.current
+  	 	#		tabs.push({:label => :label_tabtime_my_questions, :name => 'tabtime_myquestions'} ) 
+  	 	#		tabs.push({:label => :label_tabtime_questions, :name => 'tabtime_questions'} ) 
+  		#	end
   	 	# end
   		tabs.push({:label => :label_history_tab_private, :name => 'history_private'} ) if journal.private_notes?
   		
