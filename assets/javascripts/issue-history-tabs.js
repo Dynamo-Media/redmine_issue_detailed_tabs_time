@@ -14,8 +14,12 @@ function init_tabs() {
 }
 function bindTab(tabName , journal){
 	$(tabName).click(function(e){
-		$('.tab-history').removeClass('selected')
-		$(this).addClass('selected')
+		$('.tab-history').removeClass('selected');
+		$(this).addClass('selected');
+		if("replaceState" in window.history){
+			url = '?tab='tabName.replace('#tab-','');
+			window.history.replaceState(null,document.title,url);
+		}
 		show_history($(journal));
 	 })
 }
