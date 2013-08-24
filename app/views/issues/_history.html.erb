@@ -8,12 +8,15 @@ end
     # {:label => :label_tabtime_questions, :name => 'tabtime_questions'},
     # {:label => :label_history_tab_private, :name => 'history_private'},
     # {:label => :label_history_tab_time, :name => 'tabtime_time'},
+
     
 tabs = [
     {:label => :label_history_tab_all, :name => 'history_all'},
   ]
 
-selected_tab = params[:tab] ? params[:tab].to_s : 'history_all'
+validTabs = ['history_all','history_activity','history_comments','history_private','tabtime_time']
+selected tab = params[:tab] if validTabs.include?(params[:tab])
+selected_tab ||= 'history_all'
 reply_links = authorize_for('issues', 'edit')
 
 c = ''
