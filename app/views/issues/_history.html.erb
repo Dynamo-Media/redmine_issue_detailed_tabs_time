@@ -4,7 +4,7 @@ end
     
 tabs = [];
 tabsContainContent = [];
-validTabs = ['history_all','history_activity','history_comments','history_private','tabtime_time']
+validTabs = ['history_comments','history_all','history_activity','history_private','tabtime_time']
 reply_links = authorize_for('issues', 'edit')
 c = ''
 
@@ -18,7 +18,7 @@ index = 1
 
 if !entries.empty?
 	# we will first go trough all the items once so that we can determine what
-	# tabs are availebal for us to select default tab or tab in url
+	# tabs are available for us to select default tab or tab in url
 	tabs.push({:label => :label_history_tab_all, :name => 'history_all'}) if User.current.allowed_to?(:view_all,@project,:global => true)
 	for entry in entries
 		if entry.is_a?(Journal) && journals.include?(entry) 
@@ -33,18 +33,9 @@ if !entries.empty?
 	tabs.each { |tab| tabsContainContent.push(tab[:name])}
 
 	if validTabs.include?(params[:tab]) && tabsContainContent.include?(params[:tab]) 
-		selected_tab = params[:tab];
-	elsif tabsContainContent.include?('history_comments') 
-		selected_tab = 'history_comments';
-	elsif tabsContainContent.include?('history_all') 
-		selected_tab = 'history_all';
-	elsif tabsContainContent.include?('history_activity') 
-		selected_tab = 'history_activity';
-	elsif tabsContainContent.include?('history_private') 
-		selected_tab = 'history_private';
-	elsif tabsContainContent.include?('tabtime_time') 
-		selected_tab = 'tabtime_time';		
+		selected_tab = params[:tab]
 	end
+	selected_tab ||= validTabs.each.find{ |v| tabsContainContent.include? v }
 	
 	for entry in entries
 		if entry.is_a?(Journal) && journals.include?(entry) # only show if visible
