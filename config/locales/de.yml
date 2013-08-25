@@ -8,6 +8,6 @@ de:
   label_history_time_logged_by: Erfasst von %{author} vor %{age}
   label_history_tab_time: Zeiterfassung
   label_tabtime_questions: Fragen
-  view_all: View all
-  view_comments: View comments
-  view_activity: View activity
+  view_all: Alle anzeigen
+  view_comments: Kommentare anzeigen
+  view_activity: Aktivitäten anzeigen
