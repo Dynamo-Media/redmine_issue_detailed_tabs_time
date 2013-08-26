@@ -8,6 +8,7 @@ en:
   label_history_time_logged_by: Logged by %{author} %{age} ago
   label_history_tab_time: Time Log
   label_tabtime_questions: Questions
-  view_all: View all
-  view_comments: View comments
-  view_activity: View activity
+  
+  permission_view_all: View all
+  permission_view_comments: View comments
+  permission_view_activity: View activity

@@ -2,9 +2,12 @@ require 'redmine'
 require 'issue_tabs_listener.rb'
 
 Redmine::Plugin.register :redmine_issue_detailed_tabs_time do
-  permission :view_all, { :all => :index }
-  permission :view_comments, { :all => :index }
-  permission :view_activity, { :all => :index }  
+  
+  project_module :issue_tracking do
+	  permission :view_all, { :all => :index }
+	  permission :view_comments, { :all => :index }
+	  permission :view_activity, { :all => :index }
+  end
   
   name 'Redmine Issue Detailed Tabs & Time'
   author 'Mark Kalender'
