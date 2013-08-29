@@ -8,3 +8,7 @@ bg:
   label_history_time_logged_by: Записано от %{author} преди %{age}
   label_history_tab_time: Използвано време
   label_tabtime_questions: Въпроси
+  
+  permission_view_all: View all
+  permission_view_comments: View comments
+  permission_view_activity: View activity

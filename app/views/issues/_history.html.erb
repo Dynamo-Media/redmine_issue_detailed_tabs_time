@@ -1,33 +1,29 @@
 <% content_for :header_tags do
-	stylesheet_link_tag('issue_history_tabs.css', :plugin => :redmine_issue_detailed_tabs_time)
+  stylesheet_link_tag('issue_history_tabs.css', :plugin => :redmine_issue_detailed_tabs_time)
 end
-
-c = ''
 
 entries = get_issue_history_tab_entries()
 
-if !entries.empty?
-  tabs = get_issue_history_tabs(entries, journals)
-    # now we will try to see what tab will be the selected one
+unless entries.empty?
+  tabs = get_issue_history_tabs(entries, journals).uniq
+  # now we will try to see what tab will be the selected one
   selected_tab = get_selected_issue_history_tab(tabs)
-	c << draw_entries_in_issue_history_tab(entries, journals)
-	 
-	tabs = tabs.uniq
-	%>
-	
-	<div class="tabs">
-		<ul>
-			<% tabs.each do |tab| -%>
+%>
+
+<div class="tabs">
+	<ul>
+		<% tabs.each do |tab| -%>
 			<li>
 				<%= link_to l(tab[:label]), { :tab => tab[:name] },
 				:id => "tab-#{tab[:name]}",
 				:class => ((tab[:name] != selected_tab ? 'tab-history' : 'tab-history selected')),
 				:onclick => "return false;"%>
 			</li>
-			<% end -%>
-		</ul>
-	</div>
-	<%= c.html_safe %>
-<% end%>
+		<% end -%>
+	</ul>
+</div>
+
+<%= c = draw_entries_in_issue_history_tab(entries, journals).html_safe %>
+<% end %>
 <% heads_for_wiki_formatter if User.current.allowed_to?(:edit_issue_notes, issue.project) || User.current.allowed_to?(:edit_own_issue_notes, issue.project) %>
 

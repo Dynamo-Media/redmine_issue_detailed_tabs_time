@@ -8,3 +8,7 @@ pt-br:
   label_history_time_logged_by: Reportado por %{author} à %{age}
   label_history_tab_time: Registro de tempo
   label_tabtime_questions: Perguntas
+
+  permission_view_all: View all
+  permission_view_comments: View comments
+  permission_view_activity: View activity

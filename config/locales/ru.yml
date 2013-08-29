@@ -8,3 +8,7 @@ ru:
   label_history_time_logged_by: Зарегистрировано %{author} %{age} назад
   label_history_tab_time: Лог времени
   label_tabtime_questions: Вопросы
+
+  permission_view_all: View all
+  permission_view_comments: View comments
+  permission_view_activity: View activity
