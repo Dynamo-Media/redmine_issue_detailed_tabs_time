@@ -9,7 +9,7 @@ bg:
   label_history_tab_time: Използвано време
   label_tabtime_questions: Въпроси
   
-  permission_view_all: Разглеждане на всичко
-  permission_view_comments: Разглеждане на коментари
-  permission_view_activity: Разглеждане на активността
+  permission_view_all: "История: разглеждане на всичко"
+  permission_view_comments: "История: разглеждане на коментари"
+  permission_view_activity: "История: разглеждане на активността"
   
