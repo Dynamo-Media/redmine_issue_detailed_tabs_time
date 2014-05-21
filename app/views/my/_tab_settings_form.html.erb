@@ -1,0 +1,4 @@
+<p>
+<%= label_tag 'pref[default_history_tab]', l(:label_issues_default_history_tab) %>
+<%= select_tag 'pref[default_history_tab]', options_for_select(%w(use_global_settings history_all history_comments history_private  history_activity history_time).collect{|v| [l("label_tab_#{v}"), v]}, @pref[:default_history_tab]) %>
+</p>

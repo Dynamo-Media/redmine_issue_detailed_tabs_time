@@ -1,0 +1,15 @@
+<% @tabs.push 'history_time' %>
+<div id='time-#{timelog.id}' class='journal has-time'>
+  <h4>
+    <%= link_to("##{index}", {:anchor => "note-#{index}"}, :class => "journal-link") %>
+    <%= avatar(timelog.user, :size => "24") %>
+    <%= content_tag('a', '', :name => "note-#{index}") %>
+    <%= authoring(timelog.created_on, timelog.user, :label => :label_history_time_logged_by) %>
+  </h4>
+  <ul class="details">
+    <li><strong><%= l(:label_history_time_spent) %>:</strong> <%= html_hours("%.2f" % timelog.hours) %> <%= l(:label_history_time_hours_on) %> <%= h(timelog.activity) %> </li>
+    <% unless timelog.comments.nil? || timelog.comments.empty? %>
+      <li><blockquote><p><%= timelog.comments %></p></blockquote></li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,22 @@
+<div id="change-<%= journal.id %>" class="<%= journal.css_classes %>">
+  <div id="note-<%= index %>">
+    <h4><%= link_to "##{index}", {:anchor => "note-#{index}"}, :class => "journal-link" %>
+    <%= avatar(journal.user, :size => "24") %>
+    <%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %></h4>
+
+    <% if journal.details.any? && can_view_activity %>
+      <% @tabs.push 'history_activity' %>
+      <ul class="details">
+        <% details_to_strings(journal.visible_details).each do |string| %>
+         <li><%= string %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if !journal.notes.blank? && (journal.private_notes? || can_view_comments) %>
+      <% @tabs.push 'history_comments' %>
+      <%= render_notes(issue, journal, :reply_links => reply_links) %>
+    <% end %>
+    <% @tabs.push 'history_private' if journal.private_notes? %>
+  </div>
+</div>
+<%= call_hook(:view_issues_history_journal_bottom, { :journal => journal }) %>

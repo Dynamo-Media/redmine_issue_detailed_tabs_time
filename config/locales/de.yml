@@ -1,13 +1,20 @@
 de:
-  label_history_tab_all: Alles
-  label_history_tab_activity: Aktivitäten
-  label_history_tab_comments: Kommentare
-  label_history_tab_private: Privates
+  setting_issue_history_tabs: Issue History Tabs
+
+  label_tab_history_all: Alles
+  label_tab_history_activity: Aktivitäten
+  label_tab_history_comments: Kommentare
+  label_tab_history_private: Privates
+  label_tab_history_time: Zeiterfassung
+  label_tab_history_questions: Fragen
+  
+  label_tab_use_global_settings: Use global settings
+
   label_history_time_spent: Aufgewendete Zeit
   label_history_time_hours_on: Stunden für
   label_history_time_logged_by: Erfasst von %{author} vor %{age}
-  label_history_tab_time: Zeiterfassung
-  label_tabtime_questions: Fragen
+
+  label_issues_default_history_tab: Default tab
   
   permission_view_all: Alle anzeigen
   permission_view_comments: Kommentare anzeigen

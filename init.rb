@@ -1,6 +1,9 @@
 require 'redmine'
-require 'issue_tabs_listener'
-require_dependency 'issue_detailed_tabs_time_issues_helper_patch'
+
+require 'issue_detailed_tabs/hooks/base_html_head_hook'
+require 'issue_detailed_tabs/hooks/my_account_prefs_hook'
+
+require_dependency 'issue_detailed_tabs/patches/user_preference_patch'
 
 Redmine::Plugin.register :redmine_issue_detailed_tabs_time do
   
@@ -14,4 +17,8 @@ Redmine::Plugin.register :redmine_issue_detailed_tabs_time do
   author 'Mark Kalender'
   description 'This plugin provide breaks down issues comments into tabs, also adds a time log'
   version '0.1.0'
+  
+  settings :default => {
+    :default_tab => 'history_comments',
+  }, :partial => 'settings/issue_detailed_tabs'  
 end

@@ -1,13 +1,20 @@
 ru:
-  label_history_tab_all: Все
-  label_history_tab_activity: Активность
-  label_history_tab_comments: Комментарии
-  label_history_tab_private: Частное
+  setting_issue_history_tabs: Вкладки истории задач
+
+  label_tab_history_all: Все
+  label_tab_history_activity: Активность
+  label_tab_history_comments: Комментарии
+  label_tab_history_private: Частное
+  label_tab_history_time: Учет времени
+  label_tab_history_questions: Вопросы
+
+  label_tab_use_global_settings: Использовать глобальные настройки
+
   label_history_time_spent: Затраченное время
   label_history_time_hours_on: часов на 
   label_history_time_logged_by: Зарегистрировано %{author} %{age} назад
-  label_history_tab_time: Учет времени
-  label_tabtime_questions: Вопросы
+  
+  label_issues_default_history_tab: Вкладка по-умолчанию
 
   permission_view_all: Просмотр всего
   permission_view_comments: Просмотр комментариев

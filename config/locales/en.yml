@@ -1,14 +1,22 @@
 en:
-  label_history_tab_all: All
-  label_history_tab_activity: Activity
-  label_history_tab_comments: Comments
-  label_history_tab_private: Private
+  setting_issue_history_tabs: Issue History Tabs
+
+  label_tab_history_all: All
+  label_tab_history_activity: Activity
+  label_tab_history_comments: Comments
+  label_tab_history_private: Private
+  label_tab_history_time: Time Log
+  label_tab_history_questions: Questions
+  
+  label_tab_use_global_settings: Use global settings
+
   label_history_time_spent: Time Spent
   label_history_time_hours_on: hours on
   label_history_time_logged_by: Logged by %{author} %{age} ago
-  label_history_tab_time: Time Log
-  label_tabtime_questions: Questions
+  
+  label_issues_default_history_tab: Default tab
   
   permission_view_all: View all
   permission_view_comments: View comments
   permission_view_activity: View activity
+  

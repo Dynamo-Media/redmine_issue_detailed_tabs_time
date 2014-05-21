@@ -1,29 +1,71 @@
-<% content_for :header_tags do
-  stylesheet_link_tag('issue_history_tabs.css', :plugin => :redmine_issue_detailed_tabs_time)
-end
+<% 
+  content_for :header_tags do
+    stylesheet_link_tag('issue_history_tabs.css', :plugin => :redmine_issue_detailed_tabs_time)
+  end
 
-entries = get_issue_history_tab_entries()
+  # get permissions
+  can_view_all = User.current.allowed_to?(:view_all, @project,:global => true)
+  can_view_comments = User.current.allowed_to?(:view_comments, @project,:global => true)
+  can_view_activity = User.current.allowed_to?(:view_activity, @project,:global => true) 
+  can_view_time_entries = User.current.allowed_to?(:view_time_entries, @project);
 
-unless entries.empty?
-  tabs = get_issue_history_tabs(entries, journals).uniq
-  # now we will try to see what tab will be the selected one
-  selected_tab = get_selected_issue_history_tab(tabs)
+  reply_links = authorize_for('issues', 'edit')
+
+  entries = []
+  entries = journals if can_view_all || can_view_comments || can_view_activity
+  entries += @issue.time_entries if can_view_time_entries 
+  
+  entries.sort! { |x,y| x.created_on <=> y.created_on }
+  entries.reverse! if User.current.wants_comments_in_reverse_order?
+  
+  index = 1
+  journal_text= '' 
+  @tabs =[]
+  @tabs += ['history_all'] if can_view_all 
+
+  for entry in entries
+    if entry.is_a?(Journal)
+    	
+      if (entry.details.any? && can_view_activity) ||
+      	 (entry.notes? && (entry.private_notes? || can_view_comments))
+    	
+	      journal_text += render :partial => 'history_journal', :locals => { 
+	      	:journal => entry, 
+	      	:issue => issue, 
+	      	:index => User.current.wants_comments_in_reverse_order? ? entries.count - index + 1 : index, 
+	      	:reply_links => reply_links,
+	      	:can_view_comments => can_view_comments,
+	      	:can_view_activity => can_view_activity }
+	  end
+    elsif entry.is_a?(TimeEntry)  
+      journal_text +=  render :partial => 'history_timelog', :locals => { 
+      	:timelog => entry, 
+      	:index => User.current.wants_comments_in_reverse_order? ? entries.count - index + 1 : index }
+    end  
+    index += 1
+  end
+  
+  @tabs.uniq!
+  
+  selected_tab = User.current.pref.def_history_tab
+  selected_tab = @tabs.first unless @tabs.include?(selected_tab)
 %>
 
 <div class="tabs">
-	<ul>
-		<% tabs.each do |tab| -%>
-			<li>
-				<%= link_to l(tab[:label]), { :tab => tab[:name] },
-				:id => "tab-#{tab[:name]}",
-				:class => ((tab[:name] != selected_tab ? 'tab-history' : 'tab-history selected')),
-				:onclick => "return false;"%>
-			</li>
-		<% end -%>
-	</ul>
+  <ul>
+    <% @tabs.each do |tab| %>
+	  <li>
+        <%= link_to l('label_tab_' + tab), { :tab => tab },
+                :id => "tab-#{tab}",
+				:class => ((tab != selected_tab ? 'tab-history' : 'tab-history selected')),
+				:onclick => "return false;" %>
+	  </li>
+	<% end %>
+  </ul>
 </div>
 
-<%= c = draw_entries_in_issue_history_tab(entries, journals).html_safe %>
-<% end %>
+
+<%= journal_text.html_safe() %>
+
 <% heads_for_wiki_formatter if User.current.allowed_to?(:edit_issue_notes, issue.project) || User.current.allowed_to?(:edit_own_issue_notes, issue.project) %>
 

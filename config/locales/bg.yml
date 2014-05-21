@@ -1,13 +1,20 @@
 bg:
-  label_history_tab_all: Всичко
-  label_history_tab_activity: Активност
-  label_history_tab_comments: Бележки
-  label_history_tab_private: Лични бележки
+  setting_issue_history_tabs: Issue History Tabs
+
+  label_tab_history_all: Всичко
+  label_tab_history_activity: Активност
+  label_tab_history_comments: Бележки
+  label_tab_history_private: Лични бележки
+  label_tab_history_time: Използвано време
+  label_tab_history_questions: Въпроси
+  
+  label_tab_use_global_settings: Use global settings
+
   label_history_time_spent: Използвано време
   label_history_time_hours_on: часове за
   label_history_time_logged_by: Записано от %{author} преди %{age}
-  label_history_tab_time: Използвано време
-  label_tabtime_questions: Въпроси
+  
+  label_issues_default_history_tab: Default tab
   
   permission_view_all: "История: разглеждане на всичко"
   permission_view_comments: "История: разглеждане на коментари"
